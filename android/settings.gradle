@@ -1,0 +1,3 @@
+rootProject.name = 'ReactNativeNotes'
+
+include ':app'
