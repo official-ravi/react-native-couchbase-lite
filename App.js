@@ -12,7 +12,21 @@ import {
   View
 } from 'react-native';
 
-import CouchbaseLite from 'react-native-cbl';
+import CouchbaseLite, { cblProvider } from 'react-native-cbl';
+
+const views = {
+  notes: {
+    map: function(doc) {
+      if (doc.docType == 'note') {
+        emit(doc.dateCreated, null)
+      }
+    }.toString(),
+  },
+}
+
+CouchbaseLite.openDb('odygos', false).then( () =>
+  CouchbaseLite.updateDocument( '_design/main', { views } )
+)
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' +
@@ -22,6 +36,12 @@ const instructions = Platform.select({
 });
 
 type Props = {};
+
+@cblProvider( props => ({
+  notes: {
+    view: 'main/notes',
+  },
+}))
 export default class App extends Component<Props> {
   render() {
     return (
