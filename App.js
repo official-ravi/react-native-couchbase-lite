@@ -12,6 +12,8 @@ import {
   View
 } from 'react-native';
 
+import CouchbaseLite from 'react-native-cbl';
+
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' +
     'Cmd+D or shake for dev menu',

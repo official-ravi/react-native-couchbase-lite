@@ -9,7 +9,7 @@
   "dependencies": {
     "react": "^16.3.0-alpha.1",
     "react-native": "0.54.2",
-    "react-native-cbl": "1.0.0"
+    "react-native-cbl": "file:/Users/kirilllebedev/ws/owl/react-native-cbl"
   },
   "devDependencies": {
     "babel-jest": "22.4.3",
