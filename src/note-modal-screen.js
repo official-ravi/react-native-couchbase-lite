@@ -1,7 +1,8 @@
 import React from 'react'
+import { Image, CameraRoll, Platform } from 'react-native'
 import { Container, Header, Footer, Title, Content, Button, Left, Right, Body,
   Icon, Text, Form, Item, Input } from 'native-base'
-import CouchbaseLite from 'react-native-cbl'
+import CouchbaseLite, { CBLImage } from 'react-native-cbl'
 
 export default class NoteModalScreen extends React.Component {
   static getDerivedStateFromProps(nextProps, prevState){
@@ -27,13 +28,21 @@ export default class NoteModalScreen extends React.Component {
         title: this.state.values.title,
         text: this.state.values.text,
       })
+      if (this.state.attachmentUri) {
+        await CouchbaseLite.addAttachment(this.state.attachmentUri, 'photo', navParams.note._id)
+      } else if (this.state.removeAttachment) {
+        await CouchbaseLite.removeAttachment('photo', navParams.note._id)
+      }
     } else {
-      await CouchbaseLite.createDocument({
+      const docId = await CouchbaseLite.createDocument({
         title: this.state.values.title,
         text: this.state.values.text,
         createdTime: new Date(),
         docType: 'note',
       })
+      if (this.state.attachmentUri) {
+        await CouchbaseLite.addAttachment(this.state.attachmentUri, 'photo', docId)
+      }
     }
     this.props.navigation.goBack()
   }
@@ -41,6 +50,23 @@ export default class NoteModalScreen extends React.Component {
   onDeleteButtonPress = async () => {
     await CouchbaseLite.deleteDocument( this.props.navigation.state.params.note._id )
     this.props.navigation.goBack()
+  }
+
+  onAddAttachmentPress = async () => {
+    const photos = await CameraRoll.getPhotos(
+      Platform.select({ios: {first: 1, groupTypes: 'All'}, android: {first: 1}})
+    )
+    this.setState({
+      attachmentUri: photos.edges[0].node.image.uri,
+      removeAttachment: false,
+    })
+  }
+
+  onRemoveAttachmentPress = () => {
+    this.setState({
+      removeAttachment: true,
+      attachmentUri: null,
+    })
   }
 
   render() {
@@ -81,6 +107,27 @@ export default class NoteModalScreen extends React.Component {
                 onChangeText={value => this.onValueChange('text', value)}
               />
             </Item>
+            {
+              !this.state.removeAttachment ? (
+                this.state.attachmentUri ? (
+                  <Image
+                    style={{width: 100, height: 100}}
+                    source={{uri: this.state.attachmentUri}}
+                  />
+                ) : (
+                  <CBLImage
+                    style={{width: 100, height: 100}}
+                    documentId={navParams.note._id}
+                    attachmentName="photo"
+                  />
+                )
+              ) : null
+            }
+            <Button onPress={this.onAddAttachmentPress}><Text>Add attachment</Text></Button>
+            {
+              !this.state.removeAttachment &&
+                <Button onPress={this.onRemoveAttachmentPress}><Text>Remove attachment</Text></Button>
+            }
           </Form>
         </Content>
         {
