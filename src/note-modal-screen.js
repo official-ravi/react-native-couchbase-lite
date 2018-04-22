@@ -2,7 +2,7 @@ import React from 'react'
 import { Image, CameraRoll, Platform } from 'react-native'
 import { Container, Header, Footer, Title, Content, Button, Left, Right, Body,
   Icon, Text, Form, Item, Input } from 'native-base'
-import CouchbaseLite, { CBLImage } from 'react-native-cbl'
+import CouchbaseLite from 'react-native-cbl'
 
 export default class NoteModalScreen extends React.Component {
   static getDerivedStateFromProps(nextProps, prevState){
@@ -115,11 +115,12 @@ export default class NoteModalScreen extends React.Component {
                     source={{uri: this.state.attachmentUri}}
                   />
                 ) : (
-                  <CBLImage
-                    style={{width: 100, height: 100}}
-                    documentId={navParams.note._id}
-                    attachmentName="photo"
-                  />
+                  navParams && navParams.note ? (
+                    <Image
+                      style={{width: 100, height: 100}}
+                      source={{uri: navParams.note._attachments.photo.url}}
+                    />
+                  ) : null
                 )
               ) : null
             }

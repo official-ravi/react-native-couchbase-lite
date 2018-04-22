@@ -10,38 +10,36 @@ import { cblProvider } from 'react-native-cbl'
   },
 }))
 export default class HomeScreen extends React.Component {
-  onListItemClick = note => {
-    this.props.navigation.navigate('NoteModal', { note })
+  static navigationOptions = ({navigation}) => ({
+    title: 'Notes',
+    headerRight: (
+      <Button
+        transparent
+        onPress={() => navigation.navigate('NoteModal')}
+      ><Text>Add</Text></Button>
+    ),
+  })
+
+  onListItemClick = noteId => {
+    this.props.navigation.navigate('Note', { noteId })
   }
 
   render() {
     return (
       <Container>
-        <Header>
-          <Left />
-          <Body>
-            <Title>Notes</Title>
-          </Body>
-          <Right>
-            <Button
-              transparent
-              onPress={() => this.props.navigation.navigate('NoteModal')}
-            ><Text>Add</Text></Button>
-          </Right>
-        </Header>
         <Content>
-        <List>
-          {
-            this.props.notes.map( note =>
-              <ListItem key={note._id} onPress={() => this.onListItemClick(note)}>
-                <View>
-                  <Text>{note.title}</Text>
-                  <Text>{note.text}</Text>
-                </View>
-              </ListItem>
-            )
-          }
-        </List>
+          <List>
+            {
+              this.props.notes.map( note =>
+                <ListItem key={note._id} onPress={() => this.onListItemClick(note._id)}>
+                  <View>
+                    <Text>{note.title}</Text>
+                    <Text>{note.text}</Text>
+                  </View>
+                </ListItem>
+              )
+            }
+          </List>
         </Content>
       </Container>
     )

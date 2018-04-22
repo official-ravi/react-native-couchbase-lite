@@ -1,0 +1,61 @@
+import React from 'react'
+import { View, Image } from 'react-native'
+import { Container, Header, Title, Content, Button, Left, Right, Body, Text,
+  List, ListItem } from 'native-base'
+import { cblProvider } from 'react-native-cbl'
+
+@cblProvider( props => ({
+  note: {
+    docId: props.navigation.state.params.noteId,
+  },
+}))
+export default class NoteScreen extends React.Component {
+  static navigationOptions = ({ navigation }) => ({
+    title: 'Note',
+    headerRight: (
+      <Button
+        transparent
+        onPress={() =>
+          navigation.navigate('NoteModal', { note: navigation.state.params.note })
+        }
+      ><Text>Edit</Text></Button>
+    ),
+  })
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.note != this.props.note) {
+      this.props.navigation.setParams({ note: nextProps.note })
+    }
+  }
+
+  render() {
+    return (
+      <Container>
+        <Content>
+          <List>
+            <ListItem>
+              <View>
+                <Text>Title: {this.props.note.title}</Text>
+              </View>
+            </ListItem>
+            <ListItem>
+              <View>
+                <Text>Text: {this.props.note.text}</Text>
+              </View>
+            </ListItem>
+            <ListItem>
+              <View>
+                <Text>Photo:</Text>
+                {
+                  this.props.note && this.props.note._attachments
+                    ? <Image source={{uri: this.props.note._attachments.photo.url}} style={{width: 200, height: 200}} />
+                    : null
+                }
+              </View>
+            </ListItem>
+          </List>
+        </Content>
+      </Container>
+    )
+  }
+}

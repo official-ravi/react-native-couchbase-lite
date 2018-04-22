@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { StyleSheet, View } from 'react-native'
 import { StackNavigator } from 'react-navigation'
 import HomeScreen from './src/home-screen'
+import NoteScreen from './src/note-screen'
 import NoteModalScreen from './src/note-modal-screen'
 import CouchbaseLite from 'react-native-cbl'
 
@@ -15,13 +16,20 @@ const views = {
   },
 }
 
-CouchbaseLite.openDb('odygos', false).then( () =>
+CouchbaseLite.openDb('odygos', false).then( () => {
   CouchbaseLite.updateDocument( '_design/main', { views } )
-)
+})
 
 export default StackNavigator({
-  Home: {
-    screen: HomeScreen,
+  Root: {
+    screen: StackNavigator({
+      Home: {
+        screen: HomeScreen,
+      },
+      Note: {
+        screen: NoteScreen,
+      },
+    })
   },
   NoteModal: {
     screen: NoteModalScreen,
