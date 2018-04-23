@@ -16,8 +16,9 @@ const views = {
   },
 }
 
-CouchbaseLite.openDb('odygos', false).then( () => {
+CouchbaseLite.openDb('notes', false).then( () => {
   CouchbaseLite.updateDocument( '_design/main', { views } )
+  CouchbaseLite.startReplication( 'http://localhost:4984/notes/', null )
 })
 
 export default StackNavigator({
