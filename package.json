@@ -12,6 +12,7 @@
     "react": "^16.3.0-alpha.1",
     "react-native": "0.54.2",
     "react-native-cbl": "file:/Users/kirilllebedev/ws/owl/react-native-cbl",
+    "react-native-image-picker": "^0.26.7",
     "react-navigation": "^1.5.9"
   },
   "devDependencies": {

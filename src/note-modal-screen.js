@@ -3,6 +3,7 @@ import { Image, CameraRoll, Platform } from 'react-native'
 import { Container, Header, Footer, Title, Content, Button, Left, Right, Body,
   Icon, Text, Form, Item, Input } from 'native-base'
 import CouchbaseLite from 'react-native-cbl'
+import ImagePicker from 'react-native-image-picker'
 
 export default class NoteModalScreen extends React.Component {
   static getDerivedStateFromProps(nextProps, prevState){
@@ -53,12 +54,16 @@ export default class NoteModalScreen extends React.Component {
   }
 
   onAddAttachmentPress = async () => {
-    const photos = await CameraRoll.getPhotos(
-      Platform.select({ios: {first: 1, groupTypes: 'All'}, android: {first: 1}})
-    )
-    this.setState({
-      attachmentUri: photos.edges[0].node.image.uri,
-      removeAttachment: false,
+    ImagePicker.showImagePicker({
+      title: 'Select attachment',
+    }, response => {
+      const uri = response.origURL || response.uri
+      if (uri) {
+        this.setState({
+          attachmentUri: uri,
+          removeAttachment: false,
+        })
+      }
     })
   }
 

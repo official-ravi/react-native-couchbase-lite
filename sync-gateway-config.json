@@ -1,10 +1,15 @@
 {
   "log": ["*"],
   "databases": {
-    "odygos": {
+    "notes": {
       "server": "walrus:",
       "users": { "GUEST": { "disabled": false, "admin_channels": ["*"] } },
-      "allow_empty_password": true
+      "allow_empty_password": true,
+      "sync": `
+        function(doc, oldDoc){
+          channel('!');
+        }
+      `
     }
   },
   "facebook" : {
