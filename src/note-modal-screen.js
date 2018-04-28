@@ -8,14 +8,16 @@ import ImagePicker from 'react-native-image-picker'
 @cblProvider( props => {
   const navParams = props.navigation.state.params
   return navParams && navParams.noteId ? {
-    docId: navParams.noteId,
-    live: false,
+    note: {
+      docId: navParams.noteId,
+      live: false,
+    }
   } : {}
 })
 export default class NoteModalScreen extends React.Component {
   static getDerivedStateFromProps(nextProps, prevState){
     return {
-      values: nextProps.note ? { ...nextProps.note } : {
+      values: nextProps.note && nextProps.note._id ? { ...nextProps.note } : {
         title: '',
         text: '',
       }
