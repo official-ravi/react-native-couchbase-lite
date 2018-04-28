@@ -23,6 +23,16 @@ export default class NoteScreen extends React.Component {
   })
 
   render() {
+    if (!this.props.note._id) {
+      return (
+        <Container>
+          <Content>
+            <Text>Note was deleted</Text>
+          </Content>
+        </Container>
+      )
+    }
+
     return (
       <Container>
         <Content>
@@ -41,7 +51,7 @@ export default class NoteScreen extends React.Component {
               <View>
                 <Text>Photo:</Text>
                 {
-                  this.props.note && this.props.note._attachments
+                  this.props.note && this.props.note._attachments && this.props.note._attachments.photo
                     ? <Image source={{uri: this.props.note._attachments.photo.url}} style={{width: 200, height: 200}} />
                     : null
                 }

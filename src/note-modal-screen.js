@@ -56,7 +56,7 @@ export default class NoteModalScreen extends React.Component {
   }
 
   onDeleteButtonPress = async () => {
-    await CouchbaseLite.deleteDocument( this.props.navigation.state.params.note._id )
+    await CouchbaseLite.deleteDocument( this.props.note._id )
     this.props.navigation.goBack()
   }
 
@@ -126,7 +126,7 @@ export default class NoteModalScreen extends React.Component {
                     source={{uri: this.state.attachmentUri}}
                   />
                 ) : (
-                  this.props.note && this.props.note._id ? (
+                  this.props.note && this.props.note._id && this.props.note._attachments && this.props.note._attachments.photo ? (
                     <Image
                       style={{width: 100, height: 100}}
                       source={{uri: this.props.note._attachments.photo.url}}
