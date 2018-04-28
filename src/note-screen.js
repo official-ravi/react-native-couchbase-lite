@@ -16,17 +16,11 @@ export default class NoteScreen extends React.Component {
       <Button
         transparent
         onPress={() =>
-          navigation.navigate('NoteModal', { note: navigation.state.params.note })
+          navigation.navigate('NoteModal', { noteId: navigation.state.params.noteId })
         }
       ><Text>Edit</Text></Button>
     ),
   })
-
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.note != this.props.note) {
-      this.props.navigation.setParams({ note: nextProps.note })
-    }
-  }
 
   render() {
     return (

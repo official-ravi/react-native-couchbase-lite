@@ -2,14 +2,19 @@ import React from 'react'
 import { Image, CameraRoll, Platform } from 'react-native'
 import { Container, Header, Footer, Title, Content, Button, Left, Right, Body,
   Icon, Text, Form, Item, Input } from 'native-base'
-import CouchbaseLite from 'react-native-cbl'
+import CouchbaseLite, { cblProvider } from 'react-native-cbl'
 import ImagePicker from 'react-native-image-picker'
 
+@cblProvider( props => ({
+  note: {
+    docId: props.navigation.state.params.noteId,
+    live: false,
+  },
+}))
 export default class NoteModalScreen extends React.Component {
   static getDerivedStateFromProps(nextProps, prevState){
-    const navParams = nextProps.navigation.state.params
     return {
-      values: navParams && navParams.note ? { ...navParams.note } : {
+      values: nextProps.note ? { ...nextProps.note } : {
         title: '',
         text: '',
       }
@@ -23,16 +28,15 @@ export default class NoteModalScreen extends React.Component {
   }
 
   onSaveButtonPress = async () => {
-    const navParams = this.props.navigation.state.params
-    if (navParams && navParams.note) {
-      await CouchbaseLite.updateDocument(navParams.note._id, {
+    if (this.props.note && this.props.note._id) {
+      await CouchbaseLite.updateDocument(this.props.note._id, {
         title: this.state.values.title,
         text: this.state.values.text,
       })
       if (this.state.attachmentUri) {
-        await CouchbaseLite.addAttachment(this.state.attachmentUri, 'photo', navParams.note._id)
+        await CouchbaseLite.addAttachment(this.state.attachmentUri, 'photo', this.props.note._id)
       } else if (this.state.removeAttachment) {
-        await CouchbaseLite.removeAttachment('photo', navParams.note._id)
+        await CouchbaseLite.removeAttachment('photo', this.props.note._id)
       }
     } else {
       const docId = await CouchbaseLite.createDocument({
@@ -75,7 +79,6 @@ export default class NoteModalScreen extends React.Component {
   }
 
   render() {
-    const navParams = this.props.navigation.state.params
     return (
       <Container>
         <Header>
@@ -120,10 +123,10 @@ export default class NoteModalScreen extends React.Component {
                     source={{uri: this.state.attachmentUri}}
                   />
                 ) : (
-                  navParams && navParams.note ? (
+                  this.props.note && this.props.note._id ? (
                     <Image
                       style={{width: 100, height: 100}}
-                      source={{uri: navParams.note._attachments.photo.url}}
+                      source={{uri: this.props.note._attachments.photo.url}}
                     />
                   ) : null
                 )
@@ -137,7 +140,7 @@ export default class NoteModalScreen extends React.Component {
           </Form>
         </Content>
         {
-          navParams && navParams.note ? (
+          this.props.note && this.props.note._id ? (
             <Footer>
               <Button danger onPress={this.onDeleteButtonPress}><Text>Delete</Text></Button>
             </Footer>
