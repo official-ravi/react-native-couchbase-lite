@@ -5,12 +5,13 @@ import { Container, Header, Footer, Title, Content, Button, Left, Right, Body,
 import CouchbaseLite, { cblProvider } from 'react-native-cbl'
 import ImagePicker from 'react-native-image-picker'
 
-@cblProvider( props => ({
-  note: {
-    docId: props.navigation.state.params.noteId,
+@cblProvider( props => {
+  const navParams = props.navigation.state.params
+  return navParams && navParams.noteId ? {
+    docId: navParams.noteId,
     live: false,
-  },
-}))
+  } : {}
+})
 export default class NoteModalScreen extends React.Component {
   static getDerivedStateFromProps(nextProps, prevState){
     return {
