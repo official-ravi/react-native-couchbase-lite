@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { StyleSheet, View } from 'react-native'
+import { StyleSheet, View, Platform } from 'react-native'
 import { StackNavigator } from 'react-navigation'
 import HomeScreen from './src/home-screen'
 import NoteScreen from './src/note-screen'
@@ -16,9 +16,12 @@ const views = {
   },
 }
 
-CouchbaseLite.openDb('notes', false).then( () => {
+const syncGateWayHost = Platform.OS == 'android' ? '10.0.2.2' : 'localhost'
+const dbName = 'notes'
+
+CouchbaseLite.openDb(dbName, false).then( () => {
   CouchbaseLite.updateDocument( '_design/main', { views } )
-  CouchbaseLite.startReplication( 'http://localhost:4984/notes/', null )
+  CouchbaseLite.startReplication( `http://${syncGateWayHost}:4984/${dbName}/`, null )
 })
 
 export default StackNavigator({
