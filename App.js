@@ -4,7 +4,7 @@ import { StackNavigator } from 'react-navigation'
 import HomeScreen from './src/home-screen'
 import NoteScreen from './src/note-screen'
 import NoteModalScreen from './src/note-modal-screen'
-import CouchbaseLite from 'react-native-cbl'
+import CouchbaseLite, { CBLConnection, CBLConnector } from 'react-native-cbl'
 
 const views = {
   notes: {
@@ -15,16 +15,11 @@ const views = {
     }.toString(),
   },
 }
-
-const syncGateWayHost = Platform.OS == 'android' ? '10.0.2.2' : 'localhost'
+const syncGatewayHost = Platform.OS == 'android' ? '10.0.2.2' : 'localhost'
 const dbName = 'notes'
+const syncGatewayUrl = `http://${syncGatewayHost}:4984/${dbName}/`
 
-CouchbaseLite.openDb(dbName, false).then( () => {
-  CouchbaseLite.updateDocument( '_design/main', { views } )
-  CouchbaseLite.startReplication( `http://${syncGateWayHost}:4984/${dbName}/`, null )
-})
-
-export default StackNavigator({
+const StackNavigatorApp = StackNavigator({
   Root: {
     screen: StackNavigator({
       Home: {
@@ -42,3 +37,19 @@ export default StackNavigator({
   mode: 'modal',
   headerMode: 'none',
 })
+
+const cblConnection = new CBLConnection({
+  dbName,
+  syncGatewayUrl,
+  views,
+})
+
+export default class App extends React.Component {
+  render() {
+    return (
+      <CBLConnector connection={cblConnection}>
+        <StackNavigatorApp />
+      </CBLConnector>
+    )
+  }
+}
