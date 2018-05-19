@@ -4329,8 +4329,9 @@ react-lifecycles-compat@^1.0.2:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/react-lifecycles-compat/-/react-lifecycles-compat-1.1.0.tgz#6641d0709bd5505329b5c90322147ef2d343485c"
 
-"react-native-cbl@file:../react-native-cbl":
+react-native-cbl@1.0.0:
   version "1.0.0"
+  resolved "https://registry.yarnpkg.com/react-native-cbl/-/react-native-cbl-1.0.0.tgz#65d607df7b62ef8754af507ab70a027ac5093c1a"
   dependencies:
     hoist-non-react-statics "^2.5.0"
 
