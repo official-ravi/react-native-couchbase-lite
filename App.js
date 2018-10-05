@@ -15,7 +15,7 @@ const views = {
     }.toString()
   }
 };
-const syncGatewayHost = Platform.OS == "android" ? "10.0.2.2" : "localhost";
+const syncGatewayHost = Platform.OS == "android" ? "localhost" : "localhost";
 const dbName = "notes";
 const syncGatewayUrl = `http://${syncGatewayHost}:4984/${dbName}/`;
 console.log(syncGatewayUrl, "syncGatewayUrlsyncGatewayUrlsyncGatewayUrl");
@@ -47,6 +47,9 @@ const cblConnection = new CBLConnection({
   views
 });
 
+const REPLICATION_OPTIONS = {
+  continuous: true
+};
 export default class App extends React.Component {
   render() {
     return (

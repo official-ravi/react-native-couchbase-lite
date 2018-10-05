@@ -1,26 +1,41 @@
-import React from 'react'
-import { View, Image } from 'react-native'
-import { Container, Header, Title, Content, Button, Left, Right, Body, Text,
-  List, ListItem } from 'native-base'
-import { cblProvider } from 'react-native-cbl'
+import React from "react";
+import { View, Image } from "react-native";
+import {
+  Container,
+  Header,
+  Title,
+  Content,
+  Button,
+  Left,
+  Right,
+  Body,
+  Text,
+  List,
+  ListItem
+} from "native-base";
+import { cblProvider } from "react-native-cbl";
 
-@cblProvider( props => ({
+@cblProvider(props => ({
   note: {
-    docId: props.navigation.state.params.noteId,
-  },
+    docId: props.navigation.state.params.noteId
+  }
 }))
 export default class NoteScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
-    title: 'Note',
+    title: "Note",
     headerRight: (
       <Button
         transparent
         onPress={() =>
-          navigation.navigate('NoteModal', { noteId: navigation.state.params.noteId })
+          navigation.navigate("NoteModal", {
+            noteId: navigation.state.params.noteId
+          })
         }
-      ><Text>Edit</Text></Button>
-    ),
-  })
+      >
+        <Text>Edit</Text>
+      </Button>
+    )
+  });
 
   render() {
     if (!this.props.note._id) {
@@ -30,7 +45,7 @@ export default class NoteScreen extends React.Component {
             <Text>Note was deleted</Text>
           </Content>
         </Container>
-      )
+      );
     }
 
     return (
@@ -47,7 +62,7 @@ export default class NoteScreen extends React.Component {
                 <Text>Text: {this.props.note.text}</Text>
               </View>
             </ListItem>
-            <ListItem>
+            {/* <ListItem>
               <View>
                 <Text>Photo:</Text>
                 {
@@ -56,10 +71,10 @@ export default class NoteScreen extends React.Component {
                     : null
                 }
               </View>
-            </ListItem>
+            </ListItem> */}
           </List>
         </Content>
       </Container>
-    )
+    );
   }
 }

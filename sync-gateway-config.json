@@ -7,6 +7,8 @@
       "username": "sync_gateway",
       "password": "password",
       "use_views": true,
+      "enable_shared_bucket_access": true,
+      "import_docs": "continuous",
       "users": { "GUEST": { "disabled": false, "admin_channels": ["*"] } },
       "allow_empty_password": true,
       "sync": `
