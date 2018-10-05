@@ -5,7 +5,6 @@
 	};
 	objectVersion = 46;
 	objects = {
-
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -24,7 +23,6 @@
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		15B895DF3A7D4AD3BC393595 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F2C4727B46D842D5A0FD8188 /* Ionicons.ttf */; };
 		15E87FEB325D4ED1A1888201 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0675763A8B5D4BA287DF91C7 /* Entypo.ttf */; };
-		2343DDD1790044C495A1EF67 /* libRNReactNativeCbl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FAC3A63434D84AC4924427D6 /* libRNReactNativeCbl.a */; };
 		2A8B32424EF04E3B8FF055DC /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 311C049FF3A2442892267984 /* EvilIcons.ttf */; };
 		2D02E4BC1E0B4A80006451C7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
@@ -47,13 +45,13 @@
 		7A65BEC28178426C954C554B /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 98E60FB412CC4118AA7D0597 /* Foundation.ttf */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
-		C875FB0E87F34EABB8A7680A /* libRNImagePicker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 698CD6E004D84C4893F2E064 /* libRNImagePicker.a */; };
 		D17289842070EC1200838B93 /* CouchbaseLite.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D17289822070EC1100838B93 /* CouchbaseLite.framework */; };
 		D17289852070EC1200838B93 /* CouchbaseLiteListener.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D17289832070EC1200838B93 /* CouchbaseLiteListener.framework */; };
 		D17289882070EC3F00838B93 /* libCBLJSViewCompiler.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D17289862070EC3F00838B93 /* libCBLJSViewCompiler.a */; };
 		D1728A1D2071147A00838B93 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D17289F62071147A00838B93 /* libsqlite3.tbd */; };
 		D1728A572078A12400838B93 /* libRCTCameraRoll.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D1728A562078A0EB00838B93 /* libRCTCameraRoll.a */; };
 		D79D29B60B6A4A16B4254564 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 67E1645C24794CAC9DBE43C1 /* SimpleLineIcons.ttf */; };
+		E192F6102167280400DDB377 /* libRNReactNativeCbl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FAC3A63434D84AC4924427D6 /* libRNReactNativeCbl.a */; };
 		E626C5159DD84F3DBBC83CF7 /* Roboto_medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 62101B2A58D44B68B6A10350 /* Roboto_medium.ttf */; };
 		FCEE23CD22C64B8BAED518C2 /* Roboto.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E2C682DAD9BC49BBA8B6356E /* Roboto.ttf */; };
 /* End PBXBuildFile section */
@@ -431,14 +429,13 @@
 				133E29F31AD74F7200F7D852 /* libRCTLinking.a in Frameworks */,
 				00C302E91ABCBA2D00DB3ED1 /* libRCTNetwork.a in Frameworks */,
 				139105C61AF99C1200B5F7CC /* libRCTSettings.a in Frameworks */,
+				E192F6102167280400DDB377 /* libRNReactNativeCbl.a in Frameworks */,
 				D17289882070EC3F00838B93 /* libCBLJSViewCompiler.a in Frameworks */,
 				D17289842070EC1200838B93 /* CouchbaseLite.framework in Frameworks */,
 				832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */,
 				D17289852070EC1200838B93 /* CouchbaseLiteListener.framework in Frameworks */,
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
-				2343DDD1790044C495A1EF67 /* libRNReactNativeCbl.a in Frameworks */,
-				C875FB0E87F34EABB8A7680A /* libRNImagePicker.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

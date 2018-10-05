@@ -2,7 +2,11 @@
   "log": ["*"],
   "databases": {
     "notes": {
-      "server": "walrus:",
+      "server": "http://localhost:8091",
+      "bucket": "notes",
+      "username": "sync_gateway",
+      "password": "password",
+      "use_views": true,
       "users": { "GUEST": { "disabled": false, "admin_channels": ["*"] } },
       "allow_empty_password": true,
       "sync": `
@@ -12,7 +16,7 @@
       `
     }
   },
-  "facebook" : {
-    "register" : true
+  "facebook": {
+    "register": true
   }
 }
